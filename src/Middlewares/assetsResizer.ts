@@ -11,13 +11,13 @@ export const assetsResizer = async (
   res: Response,
   next: NextFunction
 ) => {
+  if (Object.keys(req.query).length <= 0) {
+    next();
+
+    return;
+  }
+
   setTimeout(async () => {
-    if (Object.keys(req.query).length <= 0) {
-      next();
-
-      return;
-    }
-
     try {
       validationResult(req).throw();
 
