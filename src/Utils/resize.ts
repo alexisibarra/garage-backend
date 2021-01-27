@@ -3,6 +3,7 @@ import fs from "fs";
 
 export type TSupportedFileType = "jpeg" | "png" | "gif";
 
+// Based on https://malcoded.com/posts/nodejs-image-resize-express-sharp/
 export const resize = (
   path: string,
   format: TSupportedFileType,
