@@ -1,5 +1,4 @@
 import sharp from "sharp";
-import fs from "fs";
 
 export type TSupportedFileType = "jpeg" | "png" | "gif";
 
@@ -9,8 +8,7 @@ export const resize = (
   width: number,
   height: number
 ) => {
-  const readStream = fs.createReadStream(path);
-  let transform = sharp();
+  let transform = sharp(path);
 
   if (format) {
     transform = transform.toFormat(format);
@@ -20,5 +18,5 @@ export const resize = (
     transform = transform.resize(width, height);
   }
 
-  return readStream.pipe(transform);
+  return transform.toBuffer();
 };
