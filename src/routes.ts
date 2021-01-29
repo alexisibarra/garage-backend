@@ -1,9 +1,15 @@
 import { Router } from "express";
-import * as cars from "./cars.json";
+import { PrismaClient } from "@prisma/client";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+const prisma = new PrismaClient();
+
+router.get("/", async (req, res) => {
+  const cars = await prisma.car.findMany({
+    include: { maker: true, image: true },
+  });
+
   res.json(cars);
 });
 
